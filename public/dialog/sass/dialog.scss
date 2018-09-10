@@ -1,0 +1,402 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@charset "utf-8";
+@import "compass/reset";
+@import "compass/css3";
+@import "compass/layout";
+@import "compass/typography/text/ellipsis";
+@import "compass/typography/links/link-colors";
+@import 'component/_global.scss';
+
+.cpt-dw-dialog-mask{
+	position: fixed;
+	width:100%;
+	height:100%;
+	top:0;
+	left:0;
+	bottom:0;
+	right:0;
+	@include translate3d(0,0,0);
+}
+
+.cpt_mask_dialog{
+	-webkit-overflow-scrolling: touch;
+	-webkit-tap-highlight-color: transparent;
+	position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-family: '微软雅黑','Microsoft Yahei';
+    z-index: 1000002;
+    animation-duration: 0.6s;
+}
+
+.div_dialog{
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	min-width: 240px;
+    min-height: 130px;
+	@include translate(-50%,-50%);
+	// @include translate3d(-50%,-50%,0);
+	// @include display-flex;
+	// @include flex-direction(column);
+	@include box-shadow(0 3px 10px #aaa);
+
+	.close_dialog{
+		position:absolute;
+		height: 40px;
+		width: 40px;
+		right: -50px;
+		top:-50px;
+		// @include border-radius(50%);
+		// border:2px solid #fff;
+		cursor: pointer;
+		.line1{
+			position:absolute;
+			top: 50%;
+			left:50%;
+			width: 30px;
+			height: 2px;
+			background: #fff;
+			margin:0 auto;
+			-webkit-transform: translate(-50%,-50%) rotate(-45deg);
+			transform: translate(-50%,-50%) rotate(-45deg);
+		}
+		.line2{
+			position:absolute;
+			top: 50%;
+			left:50%;
+			width: 30px;
+			height: 2px;
+			background: #fff;
+			margin:0 auto;
+			-webkit-transform: translate(-50%,-50%) rotate(-45deg);
+			transform: translate(-50%,-50%) rotate(45deg);
+		}
+	}
+
+	&.no_boxShadow{
+		@include box-shadow(none);
+	}
+
+	.title_dialog{
+		font-size: 20px;
+		// @include display-flex;
+		text-overflow: ellipsis;
+		overflow:hidden;
+		white-space: nowrap;
+		padding: 10px 0;
+		height: 40px;
+		position: relative;
+		@include box-sizing(border-box);
+	}
+	
+	.discription_dialog{
+		// @include flex-grow(1);
+		// @include flex(1);
+		padding: 16px 0 14px 0;
+		font-size: 14px;
+		text-indent: 16px;
+		line-height: 1.5;
+		// @include display-flex;
+		// @include align-items(center);
+
+		.dialog_input{
+			height: 28px;
+			width: 98%;
+			margin: 0 auto;
+			outline: none;
+			border:none;
+			@include box-shadow(none);
+			border-bottom:1px solid #aaa;
+		}
+
+		.dialog_input::-webkit-input-placeholder { /* WebKit browsers */ 
+			color: #a1a1a1; 
+		} 
+		.dialog_input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
+			color: #a1a1a1; 
+		} 
+		.dialog_input::-moz-placeholder { /* Mozilla Firefox 19+ */ 
+			color: #a1a1a1; 
+		} 
+		.dialog_input:-ms-input-placeholder { /* Internet Explorer 10+ */ 
+			color: #a1a1a1; 
+		} 
+	}
+
+	.dialog_divOperation{
+		@include display-flex;
+		text-overflow: ellipsis;
+		overflow:hidden;
+		white-space: nowrap;
+		justify-content: flex-end;
+		float: right;
+		min-height: 32px;
+		line-height: 32px;
+		// height: 32px;
+
+		&.samewidth{
+			width: 100%;
+			.btn_span{
+				display: block;
+				text-align: center;
+				width: calc(50% - 10px);
+				@include box-sizing(border-box);
+				height: 100%;
+				line-height: 1.5;
+				@include flex(1);
+				&.one_btn_span{
+					margin:0!important;
+					width: 100%;
+					float: none!important;
+				}
+				&:first-child{
+					margin-right: 10px;
+					float: left;
+				}
+				&:last-child{
+					margin-left: 10px;
+					float: right;
+				}
+			}
+		}
+		
+		.btn_span{
+			@include display-flex;
+			@justify-content(center);
+			@include align-items(center);
+			-webkit-border-radius: 2px;
+			-moz-border-radius: 2px;
+			border-radius: 2px;
+			height: 20px;
+			@include box-sizing(content-box);
+			cursor: pointer;
+			font-size: 14px;
+			line-height: 18px;
+			@include user-select(none);
+
+			&:first-child{
+				margin-right:10px;
+			}
+		}
+	}
+	
+	&.primary{
+		.div_dialog{
+			@include box-shadow(0px 0px 3px 0px $dw-color-primary);
+
+			&.no_boxShadow{
+				@include box-shadow(0px 0px 0px 0px #fff);
+			}
+		}
+
+		.title_dialog{
+			color: $dw-color-primary;
+			border-bottom:1px dashed $dw-color-primary;
+		}
+
+		.discription_dialog{
+			color: #313234;
+		}
+
+		.dialog_divOperation{
+			.btn_span{
+				// @include box-shadow(0 0 1px 1px #588CD2);
+				// color: #313234;
+				color: #fff;
+				background: $dw-color-primary;
+
+				&:hover{
+					background: $dw-color-primary-hover;
+				}
+
+				&.no_bg{
+					background: #fff;
+					color: #333;
+				}
+
+				&.defalut{
+					color: #fff;
+					background: $dw-color-primary;
+				}
+
+				&.reverse{
+					color: $dw-color-primary;
+					background: #fff;
+					border: 1px solid $dw-color-primary;
+
+					&:hover{
+						color: $dw-color-primary-hover;
+						border: 1px solid $dw-color-primary-hover;
+					}
+				}
+			}
+		}
+	}
+
+	&.success{
+		.div_dialog{
+			@include box-shadow(0px 0px 3px 0px $dw-color-success);
+
+			&.no_boxShadow{
+				@include box-shadow(0px 0px 0px 0px #fff);
+			}
+		}
+
+		.title_dialog{
+			color: $dw-color-success;
+			border-bottom:1px dashed $dw-color-success;
+		}
+
+		.discription_dialog{
+			color: #283528;
+		}
+
+		.dialog_divOperation{
+			.btn_span{
+				// @include box-shadow(0 0 1px 1px #6EB279);
+				// color: #283528;
+				color: #fff;
+				background: $dw-color-success;
+
+				&:hover{
+					background: $dw-color-success-hover;
+				}
+
+				&.no_bg{
+					background: #fff;
+					color: #333;
+				}
+
+				&.defalut{
+					color: #fff;
+					background: $dw-color-success;
+				}
+
+				&.reverse{
+					color: $dw-color-success;
+					background: #fff;
+					border: 1px solid $dw-color-success;
+
+					&:hover{
+						color: $dw-color-success-hover;
+						border: 1px solid $dw-color-success-hover;
+					}
+				}
+			}
+		}
+	}
+
+	&.danger{
+		.div_dialog{
+			@include box-shadow(0px 0px 3px 0px $dw-color-danger);
+
+			&.no_boxShadow{
+				@include box-shadow(0px 0px 0px 0px #fff);
+			}
+		}
+
+		.title_dialog{
+			color: $dw-color-danger;
+			border-bottom:1px dashed $dw-color-danger;
+		}
+
+		.discription_dialog{
+			color: #4F3536;
+		}
+
+		.dialog_divOperation{
+			.btn_span{
+				// @include box-shadow(0 0 1px 1px #C54D54);
+				// color: #4F3536;
+				color: #fff;
+				background: $dw-color-danger;
+
+				&:hover{
+					background: $dw-color-danger-hover;
+				}
+
+				&.no_bg{
+					background: #fff;
+					color: #333;
+				}
+
+				&.defalut{
+					color: #fff;
+					background: $dw-color-danger;
+				}
+
+				&.reverse{
+					color: $dw-color-danger;
+					background: #fff;
+					border: 1px solid $dw-color-danger;
+
+					&:hover{
+						color: $dw-color-danger-hover;
+						border: 1px solid $dw-color-danger-hover;
+					}
+				}
+			}
+		}
+	}
+
+	&.warning{
+		.div_dialog{
+			@include box-shadow(0px 0px 3px 0px $dw-color-warning);
+
+			&.no_boxShadow{
+				@include box-shadow(0px 0px 0px 0px #fff);
+			}
+		}
+
+		.title_dialog{
+			color:$dw-color-warning;
+			border-bottom:1px dashed $dw-color-warning;
+		}
+
+		.discription_dialog{
+			color: #4F3536;
+		}
+
+		.dialog_divOperation{
+			.btn_span{
+				// @include box-shadow(0 0 1px 1px #C54D54);
+				// color: #4F3536;
+				color: #fff;
+				background: $dw-color-warning;
+
+				&:hover{
+					background: $dw-color-warning-hover;
+				}
+
+				&.no_bg{
+					background: #fff;
+					color: #333;
+				}
+
+				&.defalut{
+					color: #fff;
+					background: $dw-color-warning;
+				}
+
+				&.reverse{
+					color: $dw-color-warning;
+					background: #fff;
+					border: 1px solid $dw-color-warning;
+
+					&:hover{
+						color: $dw-color-warning-hover;
+						border: 1px solid $dw-color-warning-hover;
+					}
+				}
+			}
+		}
+	}
+}
+
